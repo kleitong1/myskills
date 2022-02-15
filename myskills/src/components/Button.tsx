@@ -34,7 +34,7 @@ export function Button({ title,...rest }: ButtonProps) { // buscou a funcao onPr
 const styles = StyleSheet.create({
 
   button: {
-    backgroundColor: '#A370F7',
+    backgroundColor: '#0471A6',
     padding: 15,
     borderRadius: 7,
     alignItems: 'center'

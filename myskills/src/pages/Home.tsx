@@ -8,7 +8,8 @@ import {
   TextInput,
   Platform,
   // carrega todos os elementos de uma lista para a rolagem (Poucos itens = tudo bem usar scrollView)
-  FlatList, // carrega apenas os elementos da lista que estão sendo visualizados no momento (muitos itens = ganho de performance)
+  FlatList,
+  Alert, // carrega apenas os elementos da lista que estão sendo visualizados no momento (muitos itens = ganho de performance)
 
 
 } from 'react-native';
@@ -35,18 +36,20 @@ export function Home() {
   const [mySkills, setMySkills] = useState<SkillData[]>([]);
   const [greetings, setGreeting] = useState('');
 
-
+  
 
   // handle é usado quando uma funcao é disparada com alguma interação do usuario
   function handleAddNewSkill() {
 
     // objeto
     const data = {
-      id: String(new Date().getTime()),
+     id: String(new Date().getTime()),
+
+     
       name: newSkill
     }
 
-
+    
 
 
     // atualiza o estado
@@ -54,6 +57,15 @@ export function Home() {
 
 
   }
+
+  function HandleRemoveSkill(id: string) {
+    
+
+    setMySkills(oldState => oldState.filter(
+      skill => skill.id !== id 
+    ));
+  }
+
 
   // arrow function () => (), ou () => {}
 
@@ -85,6 +97,8 @@ export function Home() {
 
     // atributo JSX 'style'
     <View style={styles.container}>
+
+      
 
 
       {/* /** Text é um elemento para conseguir colocar texto em tela */}
@@ -127,7 +141,10 @@ export function Home() {
         data={mySkills}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <SkillCard skill={item.name} />
+          <SkillCard 
+          skill={item.name}
+          onPress={() => HandleRemoveSkill (item.id)}
+          />
         )}
       />
 
@@ -142,7 +159,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 30,
     paddingVertical: 70,
-    backgroundColor: '#121915',
+    backgroundColor: '#061826',
 
   },
 
